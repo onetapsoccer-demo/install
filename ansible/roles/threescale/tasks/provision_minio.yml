@@ -1,0 +1,24 @@
+- name: Evaluate if Minio Stateful exists
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', 'minio_stateful.yml.j2') }}"
+
+- name: Wait for Minio instance to be running
+  k8s_info:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    api_version: v1
+    kind: Pod
+    namespace: '{{ threescale_project }}'
+    label_selectors:
+      - app = minio
+    field_selectors:
+      - status.phase=Running
+  register: r_minio_pod
+  retries: 20
+  delay: 10
+  until: r_minio_pod.resources | list | length == 1

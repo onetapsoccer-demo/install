@@ -1,0 +1,71 @@
+- name: Evaluate {{ threescale_project }} namespace
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    api_version: v1
+    kind: Namespace
+    name: '{{ threescale_project }}'
+    state: present
+
+- name: Evaluate 3scale Operator exist
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', '3scale_operator.yml.j2') }}"
+
+- name: Wait 3scale Operator
+  k8s_info:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    api_version: v1
+    kind: Pod
+    namespace: '{{ threescale_project }}'
+    label_selectors:
+      - app = 3scale-api-management
+      - com.redhat.component-name = 3scale-operator
+    field_selectors:
+      - status.phase=Running
+  register: r_3scale_operator_pod
+  retries: 20
+  delay: 10
+  until: r_3scale_operator_pod.resources | list | length == 1
+
+- name: Install Minio
+  include_tasks:
+    file: ./tasks/provision_minio.yml
+
+- name: Evaluate if 3scale Operator s3 secret exists
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', 'secret_s3.yml.j2') }}"
+
+- name: Evaluate if 3scale instance exists
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', '3scale_instance.yml.j2') }}"
+
+- name: Wait for 3scale pods to be ready
+  k8s_info:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    api_version: apps.3scale.net/v1alpha1
+    kind: APIManager
+    namespace: '{{ threescale_project }}'
+    name: example-apimanager
+  register: api_m
+  until:
+    - api_m is defined
+    - api_m.resources[0].status.deployments.ready[14] is defined
+  retries: 20
+  delay: 30

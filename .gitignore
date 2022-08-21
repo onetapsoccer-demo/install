@@ -1,0 +1,5 @@
+.DS_Store
+
+quay-secret.yml
+extra-vars.yml
+target/

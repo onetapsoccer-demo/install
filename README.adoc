@@ -1,0 +1,79 @@
+= OneTap Soccer Demo Install
+
+Automation to deploy all the assets related to the demo.
+
+== Tools available
+
+* OpenShift User Workload Monitoring
+* AMQ Streams Operator
+* Grafana Operator
+* 3Scale API Management
+
+== Install The Demo Using Ansible
+
+=== Parameters
+
+[options="header"]
+|=======================
+| Parameter | Example Value                                      | Definition
+| token | sha256~vFanQbthlPKfsaldJT3bdLXIyEkd7ypO_XPygY1DNtQ | access token for a user with cluster-admin privileges
+| server    | https://api.mycluster.opentlc.com:6443      | OpenShift cluster API URL
+| rhosak | false | Indicates if the demo will use RHOSAK, if false it will install a local AMQ Streams cluster with monitoring enabled.
+|=======================
+
+=== Deploying the demo
+----
+tkn=REPLACE_ME
+server=REPLACE_ME
+rhosak=false
+
+ansible-playbook -e token=${tkn} -e server=${server} playbook.yml
+----
+
+== Testing applications
+
+To connect the applications from outside the OpenShift cluster you first need the certificate for the TLS connection:
+
+----
+PROJECT=kafka-cluster
+
+oc extract -n $PROJECT secret/my-cluster-cluster-ca-cert --keys ca.crt --to /tmp/
+keytool -keystore /tmp/client-truststore.jks -alias CARoot -import -file /tmp/ca.crt -storepass kafka1 -noprompt
+----
+
+The keystore will be used by the applications to trust the certificate in the connection.
+
+
+=== Starting the Producer
+
+----
+PROJECT=kafka-cluster
+PRODUCER_PWD=$(oc get secret producer -n $PROJECT  -o jsonpath='{.data.password}' | base64 -d )
+BOOTSTRAP_URL=$(oc get route my-cluster-kafka-bootstrap -n $PROJECT -o jsonpath='{.spec.host}'):443
+
+mvn clean quarkus:dev -Dbootstrap.url=$BOOTSTRAP_URL  -Dproducer.pwd=$PRODUCER_PWD
+----
+
+=== Starting the Processor
+
+----
+PROJECT=kafka-cluster
+PROCESSOR_PWD=$(oc get secret processor -n $PROJECT -o jsonpath='{.data.password}' | base64 -d )
+BOOTSTRAP_URL=$(oc get route my-cluster-kafka-bootstrap -n $PROJECT -o jsonpath='{.spec.host}'):443
+
+mvn clean quarkus:dev -Dbootstrap.url=$BOOTSTRAP_URL  -Dprocessor.pwd=$PROCESSOR_PWD
+----
+
+=== Testing
+
+First monitor the stream output
+
+----
+curl  http://localhost:8080/quotes
+----
+
+Then start sending requests
+
+----
+curl  http://localhost:8080/quotes/request -X POST
+----

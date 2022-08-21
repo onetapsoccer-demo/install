@@ -1,0 +1,122 @@
+- name: Get system-seed secret
+  k8s_info:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    kind: Secret
+    name:  system-seed
+    namespace: '{{ threescale_project }}'
+    api_version: v1
+  register: r_system_seed
+  until:
+    - r_system_seed.resources is defined
+    - r_system_seed.resources[0] is defined
+  retries: 10
+  delay: 15
+
+- name: Set admin token
+  set_fact:
+    threescale_token: '{{ r_system_seed.resources[0].data.ADMIN_ACCESS_TOKEN | b64decode }}'
+
+- name: Test 3scale API Service
+  uri:
+    url: https://3scale-admin.apps.{{ domain }}/admin/api/services.json
+    validate_certs: false
+    body_format: form-urlencoded
+    method: GET
+    body:
+      access_token: '{{ threescale_token }}'
+  register: result
+  until: result.status == 200
+  retries: 10
+  delay: 15
+
+- name: Evaluate backend
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', '3scale_backend_salesforce.yml.j2') }}"
+
+- name: Check if backend is Synced
+  k8s_info:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    kind: Backend
+    name:  salesforce-webhook-ingestor-backend
+    namespace: '{{ threescale_project }}'
+    api_version: capabilities.3scale.net/v1beta1
+  register: r_backend
+  until:
+    - r_backend.resources is defined
+    - r_backend.resources[0].status.backendId is defined
+  retries: 10
+  delay: 15
+
+- name: Evaluate Product
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', '3scale_product_salesforce.yml.j2') }}"
+
+- name: Check if Product is Synced
+  k8s_info:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    kind: Product
+    name:  salesforce-webhook-ingestor-product
+    namespace: '{{ threescale_project }}'
+    api_version: capabilities.3scale.net/v1beta1
+  register: r_product
+  until:
+    - r_product.resources is defined
+    - r_product.resources[0].status.productId is defined
+  retries: 10
+  delay: 15
+
+- name: Create Application Plan
+  uri:
+    url: https://3scale-admin.apps.{{ domain }}/admin/api/services/3/application_plans.json
+    validate_certs: false
+    method: POST
+    body:
+      access_token: '{{ threescale_token }}'
+      approval_required: 'false'
+      system_name: rhi-demo-basic-plan
+      state_event: publish
+      name: rhi-demo-basic-plan
+    body_format: form-urlencoded
+    status_code: 200,201,204
+  register: r_application_plan
+
+# Using the default account
+- name: Create Application
+  uri:
+    url: https://3scale-admin.apps.{{ domain }}/admin/api/accounts/3/applications.json
+    validate_certs: false
+    method: POST
+    body:
+      access_token: '{{ threescale_token }}'
+      plan_id: '{{ r_application_plan.json.application_plan.id }}'
+      name: rhi-demo-app
+      description: app for the demo
+      user_key: '1234567890'
+    body_format: form-urlencoded
+    status_code: 200,201,204
+  register: r_application
+
+- name: Deploy to Staging
+  uri:
+    url: https://3scale-admin.apps.{{ domain }}/admin/api/services/3/proxy/deploy.json
+    validate_certs: false
+    method: POST
+    body:
+      access_token: '{{ threescale_token }}'
+    body_format: form-urlencoded
+    status_code: 200,201,204
+  register: r_application
