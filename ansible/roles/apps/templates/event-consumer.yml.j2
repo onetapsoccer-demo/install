@@ -1,0 +1,88 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: one-tap-soccer-event-consumer
+  namespace: '{{ cluster_project }}'
+  labels:
+    app: one-tap-soccer-event-consumer
+    app.kubernetes.io/component: one-tap-soccer-event-consumer
+    app.kubernetes.io/instance: one-tap-soccer-event-consumer
+    app.kubernetes.io/name: one-tap-soccer-event-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: one-tap-soccer-event-consumer
+  template:
+    metadata:
+      labels:
+        app: one-tap-soccer-event-consumer
+        deploymentconfig: one-tap-soccer-event-consumer
+    spec:
+      containers:
+        - name: one-tap-soccer-event-consumer
+          image: quay.io/vflorent/one-tap-soccer-event-consumer:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+          env:
+            - name: kafka.bootstrap.servers
+              value: 'my-cluster-kafka-bootstrap:9092'
+            - name: eventconsumer.pwd
+              value: 'CHANGEME'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: one-tap-soccer-event-consumer
+  namespace: '{{ cluster_project }}'
+  labels:
+    app: one-tap-soccer-event-consumer
+    app.kubernetes.io/component: one-tap-soccer-event-consumer
+    app.kubernetes.io/instance: one-tap-soccer-event-consumer
+    app.kubernetes.io/name: one-tap-soccer-event-consumer
+    app.kubernetes.io/part-of: one-tap-soccer
+    app.openshift.io/runtime-version: latest
+spec:
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  internalTrafficPolicy: Cluster
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: one-tap-soccer-event-consumer
+    deploymentconfig: one-tap-soccer-event-consumer
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: one-tap-soccer-event-consumer
+  namespace: '{{ cluster_project }}'
+  labels:
+    app: one-tap-soccer-event-consumer
+    app.kubernetes.io/component: one-tap-soccer-event-consumer
+    app.kubernetes.io/instance: one-tap-soccer-event-consumer
+    app.kubernetes.io/name: one-tap-soccer-event-consumer
+    app.kubernetes.io/part-of: one-tap-soccer
+    app.openshift.io/runtime-version: latest
+spec:
+  to:
+    kind: Service
+    name: one-tap-soccer-event-consumer
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+

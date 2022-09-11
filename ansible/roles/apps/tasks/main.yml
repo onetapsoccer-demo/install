@@ -1,0 +1,23 @@
+- name: Install Event Consumer Application
+  k8s:
+    state: present
+    namespace: '{{ cluster_project }}'
+    resource_definition: "{{ lookup('template', 'event-consumer.yml.j2') }}"
+
+- name: Install Event Consumer Application Metrics
+  k8s:
+    state: present
+    namespace: '{{ cluster_project }}'
+    resource_definition: "{{ lookup('template', 'pod-monitor.yml.j2') }}"
+
+- name: Evaluate One Tap Soccer application
+  k8s:
+    state: present
+    namespace: '{{ cluster_project }}'
+    resource_definition: "{{ lookup('template', 'one-tap-soccer.yml.j2') }}"
+
+- name: Evaluate Metrics Exporter application
+  k8s:
+    state: present
+    namespace: '{{ cluster_project }}'
+    resource_definition: "{{ lookup('template', 'metrics-exporter.yml.j2') }}"

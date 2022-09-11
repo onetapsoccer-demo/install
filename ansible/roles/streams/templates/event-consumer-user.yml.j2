@@ -1,9 +1,10 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
-  name: processor
+  name: event-consumer
   labels:
-    strimzi.io/cluster: {{ kafka_cluster_name }}
+    strimzi.io/cluster: '{{ kafka_cluster_name }}'
+  namespace: '{{ cluster_project }}'
 spec:
   authentication:
     type: scram-sha-512
@@ -13,32 +14,32 @@ spec:
       # Example consumer Acls for topic my-topic suing consumer group my-group
       - resource:
           type: topic
-          name: a_quote_requests
+          name: events
           patternType: literal
         operation: Read
         host: "*"
       - resource:
           type: topic
-          name: a_quote_requests
+          name: events
           patternType: literal
         operation: Describe
         host: "*"
       - resource:
           type: group
-          name: a_request_group
+          name: eventconsumer_group
           patternType: literal
         operation: Read
         host: "*"
       # Example Producer Acls for topic my-topic
       - resource:
           type: topic
-          name: a_quotes
+          name: events
           patternType: literal
         operation: Write
         host: "*"
       - resource:
           type: topic
-          name: a_quotes
+          name: events
           patternType: literal
         operation: Describe
         host: "*"

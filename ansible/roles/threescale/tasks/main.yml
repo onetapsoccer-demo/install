@@ -2,10 +2,10 @@
   include_tasks: provision_3scale.yml
   when: not delete_demo
 
-- name: Configure RHI Demo 3scale
-  include_tasks: configure_3scale.yml
-  when: not delete_demo
+# - name: Configure RHI Demo 3scale
+#   include_tasks: configure_3scale.yml
+#   when: not delete_demo
 
-- name: Delete 3scale
-  include_tasks: tasks/delete_3scale.yml
-  when: delete_demo | bool  
+# - name: Delete 3scale
+#   include_tasks: tasks/delete_3scale.yml
+#   when: delete_demo | bool  

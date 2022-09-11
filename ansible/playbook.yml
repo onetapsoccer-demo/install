@@ -27,11 +27,16 @@
       include_role:
         name: streams
 
-    - name: Include Threescale role
+    # - name: Include Threescale role
+    #   include_role:
+    #     name: threescale
+
+    - name: Install Applications
       include_role:
-        name: threescale
+        name: apps
 
     - name: Include Monitoring role
       include_role:
         name: monitoring
+    
     

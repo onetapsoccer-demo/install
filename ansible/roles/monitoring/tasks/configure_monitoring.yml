@@ -47,3 +47,9 @@
     state: present
     namespace: '{{ cluster_project}}'
     resource_definition: "{{ lookup('file', 'grafana_kafka_dashboard.yml') }}"
+
+- name: Evaluate One Tap Soccer Dashboard
+  k8s:
+    state: present
+    namespace: '{{ cluster_project}}'
+    resource_definition: "{{ lookup('file', 'onetapsoccer-dashboards.yml') }}"

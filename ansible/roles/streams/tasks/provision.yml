@@ -76,28 +76,16 @@
   k8s:
     state: present
     namespace: '{{ cluster_project }}'
-    resource_definition: "{{ lookup('template', 'producer-user.yml.j2') }}"
+    resource_definition: "{{ lookup('template', 'event-consumer-user.yml.j2') }}"
 
-- name: Evaluate User Processor
+- name: Evaluate events Topic
   k8s:
     state: present
     namespace: '{{ cluster_project }}'
-    resource_definition: "{{ lookup('template', 'processor-user.yml.j2') }}"
-
-- name: Evaluate a_quotes Topic
-  k8s:
-    state: present
-    namespace: '{{ cluster_project }}'
-    resource_definition: "{{ lookup('template', 'quote-topic.yml.j2') }}"
-
-- name: Evaluate a_quote_requests Topic
-  k8s:
-    state: present
-    namespace: '{{ cluster_project }}'
-    resource_definition: "{{ lookup('template', 'quote-request-topic.yml.j2') }}"
+    resource_definition: "{{ lookup('template', 'events-topic.yml.j2') }}"
 
 - name: Install Kafka UI
   k8s:
     state: present
     namespace: '{{ cluster_project }}'
-    resource_definition: "{{ lookup('template', 'kafka-ui.yaml.j2') }}"
+    resource_definition: "{{ lookup('template', 'kafka-ui.yml.j2') }}"
