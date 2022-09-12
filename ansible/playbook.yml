@@ -1,7 +1,7 @@
 - hosts: localhost
   name: Install AMQ Streams Monitoring Demo
   vars:
-    rhosak: false
+    rhosak: true
     cluster_project: kafka-cluster
     kafka_cluster_name: my-cluster
     grafana_user: admin
@@ -21,6 +21,15 @@
        - token is defined
        - server is defined
       ignore_errors: false
+    
+    - name: Evaluate {{ cluster_project }} Namespace
+      k8s:
+        state: present
+        kind: Project
+        api_version: project.openshift.io/v1
+        definition:
+          metadata:
+            name: "{{ cluster_project }}"
 
     - name: Include AMQ Streams role
       include_role:
