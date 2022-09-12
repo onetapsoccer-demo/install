@@ -1,7 +1,6 @@
 - hosts: localhost
   name: Install AMQ Streams Monitoring Demo
   vars:
-    demo_delete: false
     rhosak: false
     cluster_project: kafka-cluster
     kafka_cluster_name: my-cluster

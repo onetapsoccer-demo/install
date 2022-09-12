@@ -17,6 +17,7 @@ spec:
   sessionAffinity: None
   selector:
     app: kafka-ui
+  
 ---
 kind: Route
 apiVersion: route.openshift.io/v1
@@ -68,6 +69,14 @@ spec:
               value: {{ kafka_cluster_name }}
             - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
               value: '{{ kafka_cluster_name }}-kafka-bootstrap:9092'
+            - name: KAFKA_CLUSTERS_0_ZOOKEEPER
+              value: '{{ kafka_cluster_name }}-zookeeper-client:2181'
+            - name: KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL
+              value: SASL_PLAINTEXT
+            - name: KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM
+              value: PLAIN
+            - name: KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG
+              value: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="event-consumer" password="E6FAktKnF884";'
           imagePullPolicy: Always
       restartPolicy: Always
       terminationGracePeriodSeconds: 30

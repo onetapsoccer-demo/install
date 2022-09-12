@@ -23,15 +23,9 @@ Automation to deploy all the assets related to the demo.
 
 === Deploying the demo
 ----
-tkn=REPLACE_ME
-server=REPLACE_ME
-rhosak=false
+export tkn=REPLACE_ME
+export server=REPLACE_ME
+export rhosak=false
 
-./run.sh
-----
-
-or 
-
-----
-ansible-playbook -e token=${tkn} -e server=${server} playbook.yml
+ansible-playbook -e token=${tkn} -e server=${server} -e rhosak=${rhosak} playbook.yml
 ----

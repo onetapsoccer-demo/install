@@ -2,12 +2,8 @@
   include_tasks: provision.yml
   when:
   - not delete_demo
+  - not rhosak
 
-# - name: Configure AMQ Streams
-#   include_tasks: configure.yml
-#   when:
-#   - not delete_demo
-
-# - name: Delete Monitoring
-#   include_tasks: delete.yml
-#   when: delete_demo | bool
+- name: Delete Monitoring
+  include_tasks: delete.yml
+  when: delete_demo | bool

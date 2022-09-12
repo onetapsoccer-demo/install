@@ -12,7 +12,7 @@ spec:
         "list": [
           {
             "builtIn": 1,
-            "datasource": "-- Grafana --",
+            "datasource": "Prometheus",
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
@@ -30,7 +30,7 @@ spec:
       ],
       "panels": [
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -91,7 +91,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -152,7 +152,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -212,7 +212,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -272,7 +272,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -332,7 +332,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -378,7 +378,7 @@ spec:
           "pluginVersion": "7.3.7",
           "targets": [
             {
-              "expr": "sum by (player) (com_redhat_onetapsoccer_total{kind=\"goal\"})",
+              "expr": "sort_desc(sum by (player) (com_redhat_onetapsoccer_total{kind=\"goal\"}))",
               "instant": true,
               "interval": "1",
               "legendFormat": "{{player}}",
@@ -391,7 +391,7 @@ spec:
           "type": "bargauge"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -451,7 +451,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -511,7 +511,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -571,7 +571,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -631,7 +631,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -676,7 +676,7 @@ spec:
           "pluginVersion": "7.3.7",
           "targets": [
             {
-              "expr": "sum by (kind) (com_redhat_onetapsoccer_total)",
+              "expr": "sort_desc(sum by (kind) (com_redhat_onetapsoccer_total))",
               "instant": true,
               "interval": "",
               "legendFormat": "{{kind}}",
@@ -689,7 +689,7 @@ spec:
           "type": "bargauge"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -747,7 +747,7 @@ spec:
           "type": "bargauge"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
@@ -807,7 +807,7 @@ spec:
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {
