@@ -10,6 +10,15 @@
       data:
         config.yaml: |
           enableUserWorkload: true
+          prometheusK8s:
+            volumeClaimTemplate:
+              metadata:
+                name: prometheusdb
+              spec:
+                storageClassName: gp2
+                resources:
+                  requests:
+                    storage: 20Gi
 
 - name: Evaluate Grafana Operator
   k8s:
