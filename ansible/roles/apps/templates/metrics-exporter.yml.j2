@@ -22,11 +22,14 @@ spec:
     spec:
       containers:
         - name: metrics-exporter
-          image: quay.io/hodrigohamalho/metrics-exporter:production
+          image: quay.io/vflorent/one-tap-soccer-metrics-exporter:latest
           ports:
             - containerPort: 8080
               protocol: TCP
           imagePullPolicy: Always
+          env:
+            - name: prometheus.host
+              value: 'prometheus-operated.openshift-monitoring.svc.cluster.local:9090'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
 ---
