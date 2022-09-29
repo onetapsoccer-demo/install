@@ -28,7 +28,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: kafka.bootstrap.servers
-              value: 'my-cluster-kafka-bootstrap:9092'
+              value: '{{ kafka_cluster_name }}-kafka-bootstrap:9092'
             - name: kafka.user
               value: 'event-consumer'
             - name: kafka.pwd
