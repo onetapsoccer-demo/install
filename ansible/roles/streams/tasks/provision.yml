@@ -27,7 +27,7 @@
         name: amq-streams
         source: redhat-operators
         sourceNamespace: openshift-marketplace
-        startingCSV: amqstreams.v2.0.0-0
+        startingCSV: amqstreams.v2.2.0-4
 
 - name: Waiting for AMQ Streams operator to install
   shell: set -o pipefail && oc get csv -n {{ cluster_project }} | grep amqstreams
