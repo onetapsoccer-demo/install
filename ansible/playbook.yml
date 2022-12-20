@@ -1,9 +1,10 @@
 - hosts: localhost
   name: Install AMQ Streams Monitoring Demo
   vars:
-    rhosak: true
+    rhosak: false
+    rhoam: false
     cluster_project: kafka-cluster
-    kafka_cluster_name: my-cluster
+    kafka_cluster_name: kafka-cluster
     grafana_user: admin
     grafana_password: admin
     insecure_skip_tls_verify: true
@@ -34,6 +35,8 @@
     - name: Include AMQ Streams role
       include_role:
         name: streams
+      when:
+       - rhosak is false
 
     # - name: Include Threescale role
     #   include_role:
