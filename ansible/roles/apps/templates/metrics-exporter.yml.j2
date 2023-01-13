@@ -29,7 +29,9 @@ spec:
           imagePullPolicy: Always
           env:
             - name: prometheus.host
-              value: 'prometheus-operated.openshift-monitoring.svc.cluster.local:9090'
+              value: {{ prometheusHost }}
+            - name: grafana.sa.token
+              value: '{{ grafanaSAToken }}'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
 ---

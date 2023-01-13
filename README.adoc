@@ -25,7 +25,11 @@ Automation to deploy all the assets related to the demo.
 ----
 export tkn=REPLACE_ME
 export server=REPLACE_ME
-export rhosak=false
+export rhosak=true
 
-ansible-playbook -e token=${tkn} -e server=${server} -e rhosak=${rhosak} playbook.yml
+prometheusHost=$(oc -n openshift-monitoring get route thanos-querier -o jsonpath='{.spec.host}')
+grafanaSAToken=$(oc sa get-token grafana-serviceaccount -n kafka-cluster)
+
+
+ansible-playbook -e token=${tkn} -e server=${server} -e rhosak=${rhosak} -e prometheusHost=${prometheusHost} -e grafanaSAToken=${grafanaSAToken} playbook.yml
 ----

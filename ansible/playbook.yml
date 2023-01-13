@@ -10,6 +10,8 @@
     insecure_skip_tls_verify: true
     threescale_project: apim
     delete_demo: false
+    prometheusHost: prometheus-operated.openshift-monitoring.svc.cluster.local:9090
+    grafanaSAToken: grafanaSAToken
   tasks:
 
     - name: Define domain
