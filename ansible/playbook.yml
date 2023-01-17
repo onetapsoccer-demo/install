@@ -43,6 +43,10 @@
     # - name: Include Threescale role
     #   include_role:
     #     name: threescale
+    
+    - name: Install Serverless
+      include_role:
+        name: serverless
 
     - name: Install Applications
       include_role:

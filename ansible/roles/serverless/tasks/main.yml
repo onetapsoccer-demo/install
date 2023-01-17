@@ -1,0 +1,4 @@
+- name: Provision Serverless
+  include_tasks: provision.yml
+  when:
+  - not delete_demo
