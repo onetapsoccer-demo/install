@@ -24,21 +24,15 @@ spec:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": 1,
-      "links": [
-        
-      ],
+      "id": 9,
+      "links": [],
       "panels": [
         {
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -50,9 +44,7 @@ spec:
               },
               "unit": "percentunit"
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 6,
@@ -68,18 +60,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_goal_total) / sum(com_redhat_onetapsoccer_shoot_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -94,13 +88,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                "align": null,
-                "filterable": false
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -111,9 +100,7 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -124,23 +111,25 @@ spec:
           "id": 4,
           "options": {
             "colorMode": "value",
-            "graphMode": "area",
+            "graphMode": "none",
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_goal_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -155,12 +144,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -171,9 +156,7 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -189,18 +172,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_game_start_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -215,12 +200,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -231,9 +212,7 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -249,18 +228,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_ground_collision_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -275,12 +256,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -291,9 +268,7 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -309,18 +284,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_pole_collision_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -332,74 +309,113 @@ spec:
           "type": "stat"
         },
         {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "Prometheus",
           "fieldConfig": {
-            "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "blue",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              
-            ]
+            "defaults": {},
+            "overrides": []
           },
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
-            "h": 8,
-            "w": 9,
-            "x": 15,
+            "h": 12,
+            "w": 11,
+            "x": 13,
             "y": 0
           },
-          "id": 13,
-          "options": {
-            "displayMode": "gradient",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "sum"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showUnfilled": true
+          "hiddenSeries": false,
+          "id": 26,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
           },
-          "pluginVersion": "7.3.7",
+          "lines": true,
+          "linewidth": 2,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": true,
           "targets": [
             {
-              "expr": "sort_desc(sum by (player) (com_redhat_onetapsoccer_total{kind=\"goal\"}))",
-              "instant": true,
+              "exemplar": true,
+              "expr": "max by (userName) (com_redhat_onetapsoccer_score )",
+              "format": "time_series",
+              "instant": false,
               "interval": "1",
-              "legendFormat": "{{player}}",
+              "intervalFactor": 1,
+              "legendFormat": "{{userName}}",
               "refId": "A"
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
-          "title": "Goals per Player",
-          "type": "bargauge"
+          "title": "Top Users Ranking",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transformations": [],
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Score",
+              "logBase": 1,
+              "max": "25",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -410,9 +426,7 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -428,18 +442,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_shoot_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -454,12 +470,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -470,9 +482,7 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -488,18 +498,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_game_over_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -514,12 +526,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -530,9 +538,7 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -548,18 +554,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_head_collision_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -574,12 +582,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -590,9 +594,7 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -608,18 +610,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_pole_collision_total) + sum(com_redhat_onetapsoccer_head_collision_total) + sum(com_redhat_onetapsoccer_ground_collision_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -634,12 +638,7 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -650,13 +649,11 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
-            "h": 8,
-            "w": 13,
+            "h": 6,
+            "w": 10,
             "x": 0,
             "y": 6
           },
@@ -666,18 +663,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
-            "showUnfilled": true
+            "showUnfilled": true,
+            "text": {}
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sort_desc(sum by (kind) (com_redhat_onetapsoccer_total))",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "{{kind}}",
               "refId": "A"
@@ -692,70 +691,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "orange",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              
-            ]
-          },
-          "gridPos": {
-            "h": 10,
-            "w": 9,
-            "x": 15,
-            "y": 8
-          },
-          "id": 19,
-          "options": {
-            "displayMode": "gradient",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showUnfilled": true
-          },
-          "pluginVersion": "7.3.7",
-          "targets": [
-            {
-              "expr": "topk(10, max by (userName) (com_redhat_onetapsoccer_score))",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "{{userName}} ",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Top 10 Users Ranking",
-          "type": "bargauge"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -766,15 +703,13 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
-            "h": 4,
-            "w": 4,
-            "x": 0,
-            "y": 14
+            "h": 3,
+            "w": 3,
+            "x": 10,
+            "y": 6
           },
           "id": 17,
           "options": {
@@ -784,18 +719,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "sum(com_redhat_onetapsoccer_total)",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -810,12 +747,8 @@ spec:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                
-              },
-              "mappings": [
-                
-              ],
+              "mappings": [],
+              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -826,15 +759,13 @@ spec:
                 ]
               }
             },
-            "overrides": [
-              
-            ]
+            "overrides": []
           },
           "gridPos": {
-            "h": 4,
-            "w": 4,
-            "x": 5,
-            "y": 14
+            "h": 3,
+            "w": 3,
+            "x": 10,
+            "y": 9
           },
           "id": 16,
           "options": {
@@ -844,18 +775,20 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "mean"
+                "lastNotNull"
               ],
               "fields": "",
               "values": false
             },
+            "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.3.7",
+          "pluginVersion": "7.5.17",
           "targets": [
             {
+              "exemplar": true,
               "expr": "count(count by (user) (com_redhat_onetapsoccer_game_start_total))",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -865,28 +798,336 @@ spec:
           "timeShift": null,
           "title": "Unique Users",
           "type": "stat"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "description": "Rate last 60s. All POD, not only our container",
+          "fieldConfig": {
+            "defaults": {
+              "displayName": "POD",
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 7,
+            "x": 0,
+            "y": 12
+          },
+          "hiddenSeries": false,
+          "id": 30,
+          "legend": {
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": true,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"kafka-cluster\", pod=~\"one-tap-soccer-event-consumer-.*\", container != \"POD\", container != \"\"}[1m])) ",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "description": "All POD, not only our container",
+          "fieldConfig": {
+            "defaults": {
+              "displayName": "POD"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 7,
+            "y": 12
+          },
+          "hiddenSeries": false,
+          "id": 28,
+          "legend": {
+            "alignAsTable": false,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "max": true,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": true,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(container_memory_usage_bytes{namespace=\"kafka-cluster\", pod=~\"one-tap-soccer-event-consumer-.*\", container != \"\"}) * 0.000001",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decmbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "decimals": null,
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "datasource": null,
+          "description": "Pods Event consumers\nAfter update the ksvc, the number should be bigger than expected because it creates and terminates the pods",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 3,
+            "x": 13,
+            "y": 12
+          },
+          "id": 21,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "center",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "count(kube_pod_info{namespace=\"kafka-cluster\", pod=~\"one-tap-soccer-event-consumer-.*\"})",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Pods",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 12
+          },
+          "id": 13,
+          "options": {
+            "displayMode": "gradient",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "text": {}
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sort_desc(sum by (player) (com_redhat_onetapsoccer_total{kind=\"goal\"}))",
+              "instant": false,
+              "interval": "1",
+              "legendFormat": "{{player}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Goals per Shirt",
+          "type": "bargauge"
         }
       ],
       "refresh": "5s",
-      "schemaVersion": 26,
+      "schemaVersion": 27,
       "style": "dark",
-      "tags": [
-        
-      ],
+      "tags": [],
       "templating": {
-        "list": [
-          
-        ]
+        "list": []
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-1h",
         "to": "now"
       },
-      "timepicker": {
-        
-      },
+      "timepicker": {},
       "timezone": "",
       "title": "One Tap Soccer",
       "uid": "sivnwUm4z",
-      "version": 16
+      "version": 9
     }

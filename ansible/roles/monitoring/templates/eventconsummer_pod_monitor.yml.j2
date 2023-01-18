@@ -10,7 +10,7 @@ spec:
     matchNames:
       - {{ cluster_project }}
   podMetricsEndpoints:
-    - interval: 10s
+    - interval: 5s
       path: /q/metrics
       scheme: http
       targetPort: 8080
