@@ -1,14 +1,26 @@
-kind: Deployment
-apiVersion: apps/v1
+kind: Service
+apiVersion: serving.knative.dev/v1
 metadata:
   name: one-tap-soccer
   namespace: '{{ cluster_project }}'
-  labels:
-    app: one-tap-soccer
-    app.kubernetes.io/component: one-tap-soccer
-    app.kubernetes.io/instance: one-tap-soccer
-    app.kubernetes.io/name: one-tap-soccer
-    app.openshift.io/runtime: java
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: '0'
+        autoscaling.knative.dev/target: "100"
+        autoscaling.knative.dev/targetUtilizationPercentage: "70"
+        autoscaling.knative.dev/window: 60s
+      creationTimestamp: null
+      labels:
+        app: one-tap-soccer
+        app.kubernetes.io/component: one-tap-soccer
+        app.kubernetes.io/instance: one-tap-soccer
+        app.kubernetes.io/name: one-tap-soccer
+        app.kubernetes.io/part-of: strimzi-kafka-cluster
+        app.openshift.io/runtime: one-tap-soccer
+        app.openshift.io/runtime-namespace: kafka-cluster
+        app.openshift.io/runtime-version: latest
 spec:
   replicas: 1
   selector:
@@ -19,65 +31,23 @@ spec:
       labels:
         app: one-tap-soccer
         deploymentconfig: one-tap-soccer
+        app.openshift.io/runtime: nginx
     spec:
+      containerConcurrency: 0
       containers:
-        - name: one-tap-soccer
-          image: quay.io/vflorent/one-tap-soccer:latest
-          ports:
-            - containerPort: 8080
-              protocol: TCP
-          imagePullPolicy: Always
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: one-tap-soccer
-  namespace: '{{ cluster_project }}'
-  labels:
-    app: one-tap-soccer
-    app.kubernetes.io/component: one-tap-soccer
-    app.kubernetes.io/instance: one-tap-soccer
-    app.kubernetes.io/name: one-tap-soccer
-    app.kubernetes.io/part-of: one-tap-soccer
-    app.openshift.io/runtime-version: latest
-spec:
-  ipFamilies:
-    - IPv4
-  ports:
-    - name: 8080-tcp
-      protocol: TCP
-      port: 8080
-      targetPort: 8080
-  internalTrafficPolicy: Cluster
-  type: ClusterIP
-  ipFamilyPolicy: SingleStack
-  sessionAffinity: None
-  selector:
-    app: one-tap-soccer
-    deploymentconfig: one-tap-soccer
----
-kind: Route
-apiVersion: route.openshift.io/v1
-metadata:
-  name: one-tap-soccer
-  namespace: '{{ cluster_project }}'
-  labels:
-    app: one-tap-soccer
-    app.kubernetes.io/component: one-tap-soccer
-    app.kubernetes.io/instance: one-tap-soccer
-    app.kubernetes.io/name: one-tap-soccer
-    app.kubernetes.io/part-of: one-tap-soccer
-    app.openshift.io/runtime-version: latest
-spec:
-  to:
-    kind: Service
-    name: one-tap-soccer
-    weight: 100
-  port:
-    targetPort: 8080-tcp
-  tls:
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
-  wildcardPolicy: None
+      - image: quay.io/vflorent/one-tap-soccer:latest
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        imagePullPolicy: Always
+        name: one-tap-soccer-event-consumer
+        readinessProbe:
+          successThreshold: 1
+          tcpSocket:
+            port: 0
+        resources: {}
+      enableServiceLinks: false
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
