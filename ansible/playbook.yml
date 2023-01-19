@@ -10,6 +10,8 @@
     insecure_skip_tls_verify: true
     threescale_project: apim
     delete_demo: false
+    # event_online uses one-tap-soccer:latest, if false; uses one-tap-soccer:v2
+    event_online: "true"
     prometheusHost: prometheus-operated.openshift-monitoring.svc.cluster.local:9090
     grafanaSAToken: grafanaSAToken
   tasks:
