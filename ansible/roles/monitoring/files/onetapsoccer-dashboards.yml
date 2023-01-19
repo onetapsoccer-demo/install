@@ -24,7 +24,7 @@ spec:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": 9,
+      "id": 10,
       "links": [],
       "panels": [
         {
@@ -1035,13 +1035,13 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "lastNotNull"
+                "last"
               ],
               "fields": "",
               "values": false
             },
             "text": {},
-            "textMode": "auto"
+            "textMode": "value"
           },
           "pluginVersion": "7.5.17",
           "targets": [
@@ -1129,5 +1129,5 @@ spec:
       "timezone": "",
       "title": "One Tap Soccer",
       "uid": "sivnwUm4z",
-      "version": 9
+      "version": 2
     }
