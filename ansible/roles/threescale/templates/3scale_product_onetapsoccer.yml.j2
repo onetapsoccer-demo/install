@@ -1,0 +1,31 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Product
+metadata:
+  name: onetapsoccer
+  namespace: '{{ threescale_project }}'
+spec:
+  description: Product to expose onetapsoccer API
+  mappingRules:
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: hits
+      pattern: /
+  metrics:
+    hits:
+      description: Number of API hits
+      friendlyName: Hits
+      unit: hit
+  applicationPlans:
+      basic-plan:
+        name: basic plan
+        appsRequireApproval: false    
+  name: Onetapsoccer
+  policies:
+    - configuration: {}
+      enabled: true
+      name: apicast
+      version: builtin
+  systemName: onetapsoccer
+  backendUsages:
+    onetapsoccer-backend:
+      path: /

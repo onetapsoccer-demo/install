@@ -31,53 +31,55 @@
   retries: 10
   delay: 15
 
-- name: Evaluate backend
-  k8s:
-    api_key: '{{ token }}'
-    host: '{{ server }}'
-    validate_certs: no
-    state: present
-    resource_definition: "{{ lookup('template', '3scale_backend_salesforce.yml.j2') }}"
+# - name: Evaluate backend
+#   k8s:
+#     state: present
+#     resource_definition: "{{ lookup('template', '3scale_backend_onetapsoccer.yml.j2') }}"
 
-- name: Check if backend is Synced
-  k8s_info:
-    api_key: '{{ token }}'
-    host: '{{ server }}'
-    validate_certs: no
-    kind: Backend
-    name:  salesforce-webhook-ingestor-backend
-    namespace: '{{ threescale_project }}'
-    api_version: capabilities.3scale.net/v1beta1
-  register: r_backend
-  until:
-    - r_backend.resources is defined
-    - r_backend.resources[0].status.backendId is defined
-  retries: 10
-  delay: 15
+# - name: Check if backend is Synced
+#   k8s_info:
+#     kind: Backend
+#     name: onetapsoccer-backend
+#     namespace: '{{ threescale_project }}'
+#     api_version: capabilities.3scale.net/v1beta1
+#   register: r_backend
+#   until:
+#     - r_backend.resources is defined
+#     - r_backend.resources[0].status.backendId is defined
+#   retries: 10
+#   delay: 15
 
-- name: Evaluate Product
-  k8s:
-    api_key: '{{ token }}'
-    host: '{{ server }}'
-    validate_certs: no
-    state: present
-    resource_definition: "{{ lookup('template', '3scale_product_salesforce.yml.j2') }}"
+# - name: Evaluate Product
+#   k8s:
+#     state: present
+#     resource_definition: "{{ lookup('template', '3scale_product_onetapsoccer.yml.j2') }}"
 
-- name: Check if Product is Synced
-  k8s_info:
-    api_key: '{{ token }}'
-    host: '{{ server }}'
-    validate_certs: no
-    kind: Product
-    name:  salesforce-webhook-ingestor-product
-    namespace: '{{ threescale_project }}'
-    api_version: capabilities.3scale.net/v1beta1
-  register: r_product
-  until:
-    - r_product.resources is defined
-    - r_product.resources[0].status.productId is defined
-  retries: 10
-  delay: 15
+# - name: Check if Product is Synced
+#   k8s_info:
+#     kind: Product
+#     name: onetapsoccer
+#     namespace: '{{ threescale_project }}'
+#     api_version: capabilities.3scale.net/v1beta1
+#   register: r_product
+#   until:
+#     - r_product.resources is defined
+#     - r_product.resources[0].status.productId is defined
+#   retries: 10
+#   delay: 15
+
+- name: Create Application Plan Sandbox
+  uri:
+    url: https://3scale-admin.apps.{{ domain }}/admin/api/services/3/application_plans.json
+    validate_certs: false
+    method: POST
+    body:
+      access_token: '{{ threescale_token }}'
+      approval_required: 'false'
+      system_name: sandbox-plan
+      state_event: publish
+      name: sandbox-plan
+    body_format: form-urlencoded
+    status_code: 200,201,204
 
 - name: Create Application Plan
   uri:
@@ -87,9 +89,9 @@
     body:
       access_token: '{{ threescale_token }}'
       approval_required: 'false'
-      system_name: rhi-demo-basic-plan
+      system_name: production-plan
       state_event: publish
-      name: rhi-demo-basic-plan
+      name: production-plan
     body_format: form-urlencoded
     status_code: 200,201,204
   register: r_application_plan
@@ -103,7 +105,7 @@
     body:
       access_token: '{{ threescale_token }}'
       plan_id: '{{ r_application_plan.json.application_plan.id }}'
-      name: rhi-demo-app
+      name: demo-app
       description: app for the demo
       user_key: '1234567890'
     body_format: form-urlencoded

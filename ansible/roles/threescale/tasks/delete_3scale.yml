@@ -1,32 +1,20 @@
 - name: Delete 3scale instance
   k8s:
-    api_key: '{{ token }}'
-    host: '{{ server }}'
-    validate_certs: no
     state: absent
     resource_definition: "{{ lookup('template', '3scale_instance.yml.j2') }}"
 
 - name: Delete Minio Stateful
   k8s:
-    api_key: '{{ token }}'
-    host: '{{ server }}'
-    validate_certs: no
     state: absent
     resource_definition: "{{ lookup('template', 'minio_stateful.yml.j2') }}"
 
 - name: Delete 3scale Operator
   k8s:
-    api_key: '{{ token }}'
-    host: '{{ server }}'
-    validate_certs: no
     state: absent
     resource_definition: "{{ lookup('template', '3scale_operator.yml.j2') }}"
 
 - name: Delete {{ threescale_project }} namespace
   k8s:
-    api_key: '{{ token }}'
-    host: '{{ server }}'
-    validate_certs: no
     api_version: v1
     kind: Namespace
     name: '{{ threescale_project }}'

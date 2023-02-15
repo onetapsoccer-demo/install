@@ -1,0 +1,82 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Backend
+metadata:
+  name: onetapsoccer-backend
+  namespace: 'kafka-cluster'
+spec:
+  methods:
+    goals_rate:
+      friendlyName: goals-rate
+    goals:
+      friendlyName: goals
+    game_start:
+      friendlyName: game-start
+    ground_collision:
+      friendlyName: ground-collision
+    pole_collision:
+      friendlyName: pole-collision
+    shoot:
+      friendlyName: shoot
+    game_over:
+      friendlyName: game-over
+    head_collision:
+      friendlyName: head-collision
+    goals_per_player:
+      friendlyName: goals-per-player
+    total_events:
+      friendlyName: total-events
+    unique_users:
+      friendlyName: unique-users
+  metrics:
+    hits:
+      description: Number of API hits
+      friendlyName: Hits
+      unit: "hit"
+  mappingRules:
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: goals_rate
+      pattern: /metrics/goals-rate
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: goals
+      pattern: /metrics/goals
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: game_start
+      pattern: /metrics/game-start
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: ground_collision
+      pattern: /metrics/ground-collision
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: pole_collision
+      pattern: /metrics/pole-collision
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: shoot
+      pattern: /metrics/shoot
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: game_over
+      pattern: /metrics/game-over
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: head_collision
+      pattern: /metrics/head-collision
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: goals_per_player
+      pattern: /metrics/goals-per-player
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: total_events
+      pattern: /metrics/total-events
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: unique_users
+      pattern: /metrics/unique-users
+  name: OnetapSoccer Game Backend
+  privateBaseURL: 'https://metrics-exporter.{{ cluster_project }}.svc.cluster.local:8080'
+  systemName: onetapsoccer-backend
