@@ -12,7 +12,7 @@
         targetNamespaces:
         - '{{ cluster_project }}'
 
-- name: Evaluate AMQ Streams Operator
+- name: Evaluate Serverless Operator
   k8s:
     state: present
     kind: Subscription
