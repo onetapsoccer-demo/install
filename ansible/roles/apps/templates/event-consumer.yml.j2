@@ -7,7 +7,7 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/min-scale: '0'
+        autoscaling.knative.dev/min-scale: '1'
         autoscaling.knative.dev/target: "100"
         autoscaling.knative.dev/targetUtilizationPercentage: "70"
         autoscaling.knative.dev/window: 60s
@@ -17,8 +17,8 @@ spec:
         app.kubernetes.io/component: one-tap-soccer-event-consumer
         app.kubernetes.io/instance: one-tap-soccer-event-consumer
         app.kubernetes.io/name: one-tap-soccer-event-consumer
-        app.kubernetes.io/part-of: strimzi-kafka-cluster
-        app.openshift.io/runtime-namespace: kafka-cluster
+        app.kubernetes.io/part-of: strimzi-{{ cluster_project }}
+        app.openshift.io/runtime-namespace: {{ cluster_project }}
         app.openshift.io/runtime-version: latest
         app.openshift.io/runtime: quarkus
     spec:
@@ -29,11 +29,15 @@ spec:
         name: one-tap-soccer-event-consumer
         env:
         - name: kafka.bootstrap.servers
-          value: {{ kafka_cluster_name }}-kafka-bootstrap:9092
+          value: game-cfj-opv-elb--tjnuq-a.bf2.kafka.rhcloud.com:443
         - name: kafka.user
-          value: event-consumer
+          value: bce87c4c-5f30-4eb2-80fc-b2b0df09927d
         - name: kafka.pwd
-          value: jPLFHwedKYvu
+          value: PCXRClkrw5oCVJNSwUf8SMWHNvY3luP7
+        - name: kafka.security.protocol
+          value: SASL_SSL
+        - name: kafka.sasl.mechanism
+          value: PLAIN
         ports:
         - containerPort: 8080
           protocol: TCP
