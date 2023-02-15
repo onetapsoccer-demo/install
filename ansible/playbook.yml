@@ -3,7 +3,7 @@
   vars:
     rhosak: false
     rhoam: false
-    cluster_project: kafka-cluster
+    cluster_project: demo
     kafka_cluster_name: kafka-cluster
     grafana_user: admin
     grafana_password: admin
@@ -11,7 +11,7 @@
     threescale_project: apim
     delete_demo: false
     # event_online uses one-tap-soccer:latest, if false; uses one-tap-soccer:v2
-    event_online: "true"
+    event_online: true
     prometheusHost: prometheus-operated.openshift-monitoring.svc.cluster.local:9090
     grafanaSAToken: grafanaSAToken
   tasks:
@@ -42,9 +42,9 @@
       when:
        - rhosak is false
 
-    # - name: Include Threescale role
-    #   include_role:
-    #     name: threescale
+    - name: Include Threescale role
+      include_role:
+        name: threescale
     
     - name: Install Serverless
       include_role:

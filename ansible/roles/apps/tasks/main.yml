@@ -15,14 +15,16 @@
     state: present
     namespace: '{{ cluster_project }}'
     resource_definition: "{{ lookup('template', 'one-tap-soccer.yml.j2') }}"
-  when: event_online == "false"
+  when:
+  - not event_online
 
 - name: Evaluate One Tap Soccer application ONLINE
   k8s:
     state: present
     namespace: '{{ cluster_project }}'
     resource_definition: "{{ lookup('template', 'one-tap-soccer-online.yml.j2') }}"
-  when: event_online == "true"
+  when:
+  - event_online
 
 - name: Evaluate Metrics Exporter application
   k8s:
