@@ -4,22 +4,6 @@
     namespace: '{{ cluster_project}}'
     resource_definition: "{{ lookup('template', 'strimzi_pod_monitor.yml.j2') }}"
 
-- name: Get Grafana ServiceAccount
-  k8s_info:
-    kind: ServiceAccount
-    name:  grafana-serviceaccount
-    namespace: '{{ cluster_project }}'
-    api_version: v1
-  register: r_grafana_sa
-  until:
-    - r_grafana_sa.resources is defined
-  retries: 10
-  delay: 15
-
-- name: Loop Secrets
-  include_tasks: tasks/loop_secrets.yml
-  with_items: '{{ r_grafana_sa.resources[0].secrets  }}'
-
 - name: Evaluate Grafana ServiceAccount permissons
   k8s:
     state: present
