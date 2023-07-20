@@ -1,29 +1,29 @@
-- name: Evaluate {{ threescale_project }} namespace
-  k8s:
-    api_version: v1
-    kind: Namespace
-    name: '{{ threescale_project }}'
-    state: present
+# - name: Evaluate {{ threescale_project }} namespace
+#   k8s:
+#     api_version: v1
+#     kind: Namespace
+#     name: '{{ threescale_project }}'
+#     state: present
 
-- name: Evaluate 3scale Operator exist
-  k8s:
-    state: present
-    resource_definition: "{{ lookup('template', '3scale_operator.yml.j2') }}"
+# - name: Evaluate 3scale Operator exist
+#   k8s:
+#     state: present
+#     resource_definition: "{{ lookup('template', '3scale_operator.yml.j2') }}"
 
-- name: Wait 3scale Operator
-  k8s_info:
-    api_version: v1
-    kind: Pod
-    namespace: '{{ threescale_project }}'
-    label_selectors:
-      - app = 3scale-api-management
-      - com.redhat.component-name = 3scale-operator
-    field_selectors:
-      - status.phase=Running
-  register: r_3scale_operator_pod
-  retries: 20
-  delay: 10
-  until: r_3scale_operator_pod.resources | list | length == 1
+# - name: Wait 3scale Operator
+#   k8s_info:
+#     api_version: v1
+#     kind: Pod
+#     namespace: '{{ threescale_project }}'
+#     label_selectors:
+#       - app = 3scale-api-management
+#       - com.redhat.component-name = 3scale-operator
+#     field_selectors:
+#       - status.phase=Running
+#   register: r_3scale_operator_pod
+#   retries: 20
+#   delay: 10
+#   until: r_3scale_operator_pod.resources | list | length == 1
 
 - name: Install Minio
   include_tasks:

@@ -1,3 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: one-tap-soccer
+  labels:
+    app: grafana
+spec:
+  name: onetapsoccer.json
+  json: |    
     {
       "annotations": {
         "list": [

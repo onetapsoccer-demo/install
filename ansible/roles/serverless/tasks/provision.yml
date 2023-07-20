@@ -1,32 +1,32 @@
-- name: Evaluate Operator Group
-  when: not delete_demo
-  k8s:
-    state: present
-    api_version: operators.coreos.com/v1
-    kind: OperatorGroup
-    definition:
-      metadata:
-        name: '{{ cluster_project }}-operatorgroup'
-        namespace: '{{ cluster_project}}'
-      spec:
-        targetNamespaces:
-        - '{{ cluster_project }}'
+# - name: Evaluate Operator Group
+#   when: not delete_demo
+#   k8s:
+#     state: present
+#     api_version: operators.coreos.com/v1
+#     kind: OperatorGroup
+#     definition:
+#       metadata:
+#         name: '{{ cluster_project }}-operatorgroup'
+#         namespace: '{{ cluster_project}}'
+#       spec:
+#         targetNamespaces:
+#         - '{{ cluster_project }}'
 
-- name: Evaluate Serverless Operator
-  k8s:
-    state: present
-    kind: Subscription
-    api_version: operators.coreos.com/v1alpha1
-    definition:
-      metadata:
-        name: serverless-operator
-        namespace: openshift-operators
-      spec:
-        channel: stable
-        installPlanApproval: Automatic
-        name: serverless-operator
-        source: redhat-operators
-        sourceNamespace: openshift-marketplace
+# - name: Evaluate Serverless Operator
+#   k8s:
+#     state: present
+#     kind: Subscription
+#     api_version: operators.coreos.com/v1alpha1
+#     definition:
+#       metadata:
+#         name: serverless-operator
+#         namespace: openshift-operators
+#       spec:
+#         channel: stable
+#         installPlanApproval: Automatic
+#         name: serverless-operator
+#         source: redhat-operators
+#         sourceNamespace: openshift-marketplace
 
 - name: Evaluate knative-eventing
   k8s:

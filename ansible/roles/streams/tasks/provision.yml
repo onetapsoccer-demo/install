@@ -1,42 +1,42 @@
-- name: Evaluate Operator Group
-  when: not delete_demo
-  k8s:
-    state: present
-    api_version: operators.coreos.com/v1
-    kind: OperatorGroup
-    definition:
-      metadata:
-        name: '{{ cluster_project }}-operatorgroup'
-        namespace: '{{ cluster_project}}'
-      spec:
-        targetNamespaces:
-        - '{{ cluster_project }}'
+# - name: Evaluate Operator Group
+#   when: not delete_demo
+#   k8s:
+#     state: present
+#     api_version: operators.coreos.com/v1
+#     kind: OperatorGroup
+#     definition:
+#       metadata:
+#         name: '{{ cluster_project }}-operatorgroup'
+#         namespace: '{{ cluster_project}}'
+#       spec:
+#         targetNamespaces:
+#         - '{{ cluster_project }}'
 
-- name: Evaluate AMQ Streams Operator
-  k8s:
-    state: present
-    kind: Subscription
-    api_version: operators.coreos.com/v1alpha1
-    definition:
-      metadata:
-        name: amq-streams
-        namespace: '{{ cluster_project }}'
-      spec:
-        channel: stable
-        installPlanApproval: Automatic
-        name: amq-streams
-        source: redhat-operators
-        sourceNamespace: openshift-marketplace
-        startingCSV: amqstreams.v2.2.0-4
+# - name: Evaluate AMQ Streams Operator
+#   k8s:
+#     state: present
+#     kind: Subscription
+#     api_version: operators.coreos.com/v1alpha1
+#     definition:
+#       metadata:
+#         name: amq-streams
+#         namespace: '{{ cluster_project }}'
+#       spec:
+#         channel: stable
+#         installPlanApproval: Automatic
+#         name: amq-streams
+#         source: redhat-operators
+#         sourceNamespace: openshift-marketplace
+#         startingCSV: amqstreams.v2.3.0-1
 
-- name: Waiting for AMQ Streams operator to install
-  shell: set -o pipefail && oc get csv -n {{ cluster_project }} | grep amqstreams
-  register: install_status
-  until: "'Succeeded' in install_status.stdout"
-  retries: 20
-  delay: 15
-  args:
-    executable: /bin/bash
+# - name: Waiting for AMQ Streams operator to install
+#   shell: set -o pipefail && oc get csv -n {{ cluster_project }} | grep amqstreams
+#   register: install_status
+#   until: "'Succeeded' in install_status.stdout"
+#   retries: 20
+#   delay: 15
+#   args:
+#     executable: /bin/bash
 
 - name: Evaluate Cluster ConfigMap
   k8s:
